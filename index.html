@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PASS ANGLE 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #fff6f8, #fdecef);
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 2s ease;
+    }
+    body.fade-out { opacity: 0; }
+
+    .container {
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+      padding: 60px;
+      width: 440px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-frame {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 30px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #ffe4ea, #fff);
+      border: 3px solid #f3b6c4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    h1 { margin-bottom: 10px; font-size: 1.6rem; }
+
+    p {
+      color: #777;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    .pin {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .pin input {
+      width: 60px;
+      height: 70px;
+      text-align: center;
+      font-size: 1.6rem;
+      border-radius: 16px;
+      border: 2px solid #f3b6c4;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .pin input:focus {
+      border-color: #f08ca0;
+      box-shadow: 0 0 0 4px rgba(240,140,160,0.25);
+      transform: translateY(-2px);
+    }
+
+    .pin input.filled {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(243,182,196,0.55);
+    }
+
+    .pin input.shake { animation: shake 0.35s; }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+
+    button {
+      width: 100%;
+      height: 52px;
+      border-radius: 18px;
+      border: none;
+      font-size: 1rem;
+      background: #f3b6c4;
+      color: white;
+      cursor: pointer;
+    }
+
+    .float-item {
+      position: absolute;
+      font-size: 22px;
+      pointer-events: none;
+      left: 50vw;
+      top: 50vh;
+      z-index: 3;
+      animation: heartBurst 1.8s ease-out forwards;
+    }
+
+    @keyframes heartBurst {
+      from { transform: translate(0,0) scale(1); opacity: 1; }
+      to { transform: translate(var(--x), var(--y)) scale(0.6); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="photo-frame">
+      <img src="image/IMG_0514.JPG" alt="">
+    </div>
+
+    <h1>DEAR ANGLE 🐇</h1>
+    <p id="hint">วันไหนล่ะ ที่เธอต้องกินเค้ก 🎂 💕</p>
+
+    <div class="pin">
+      <input type="password" maxlength="1" />
+      <input type="password" maxlength="1" />
+      <input type="password" maxlength="1" />
+      <input type="password" maxlength="1" />
+      <input type="password" maxlength="1" />
+      <input type="password" maxlength="1" />
+    </div>
+
+    <button id="submitBtn">เปิดการ์ดวันเกิด 🎂</button>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="bgm" preload="auto">
+    <source src="sound/success.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id ="wrong" preload="auto">
+    <source  src="sound/wrong-answer-129254.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    var correctPin = '281245';
+    var inputs = document.querySelectorAll('.pin input');
+    var hint = document.getElementById('hint');
+    var btn = document.getElementById('submitBtn');
+
+    var audio = document.getElementById('bgm');
+    var audio_wrong = document.getElementById('wrong');
+    var startTime = 11; // วินาทีเริ่มเสียง
+    var endTime = 15;   // วินาทีหยุดเสียง
+
+    btn.onclick = unlock;
+
+    function unlock() {
+      var entered = '';
+      for (var i = 0; i < inputs.length; i++) {
+        entered += inputs[i].value;
+      }
+
+      if (entered === correctPin) {
+        hint.innerHTML = 'เก่งสุดๆ เลย 💖 กำลังเปิดการ์ดให้นะ';
+
+        // PLAY AUDIO
+        audio.currentTime = startTime;
+        audio.play();
+
+        setTimeout(function () {
+          audio.pause();
+        }, (endTime - startTime) * 1000);
+
+        celebrate();
+
+        setTimeout(function () {
+          document.body.classList.add('fade-out');
+          setTimeout(function () {
+            window.location.href = 'birthday.html';
+          }, 2000);
+        }, 1000);
+
+      } else {
+        audio_wrong.play();
+        hint.innerHTML = 'เอ๊ะ ดูเหมือนรหัสจะยังไม่ถูกนะ ลองใหม่อีกครั้งสิ 💕';
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].value = '';
+          inputs[i].classList.remove('filled');
+          inputs[i].classList.add('shake');
+        }
+
+        setTimeout(function () {
+          hint.innerHTML = 'ใส่รหัส 6 หลัก ที่คิดว่าใช่นะจ๊ะ 💕';
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].classList.remove('shake');
+          }
+        }, 1500);
+
+        inputs[0].focus();
+      }
+    }
+
+    (function initPinInputs() {
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function () {
+          if (this.value) {
+            this.classList.add('filled');
+            if (inputs[i + 1]) inputs[i + 1].focus();
+          }
+        });
+
+        inputs[i].addEventListener('keydown', function (e) {
+          if (e.key === 'Backspace' && this.value === '' && inputs[i - 1]) {
+            inputs[i - 1].value = '';
+            inputs[i - 1].classList.remove('filled');
+            inputs[i - 1].focus();
+            e.preventDefault();
+          }
+        });
+      }
+    })();
+
+    function celebrate() {
+      var total = 36;
+      for (var i = 0; i < total; i++) {
+        var heart = document.createElement('div');
+        heart.className = 'float-item';
+        heart.innerHTML = '💖';
+
+        var angle = (Math.PI * 2 / total) * i;
+        var radius = 260;
+        heart.style.setProperty('--x', Math.cos(angle) * radius + 'px');
+        heart.style.setProperty('--y', Math.sin(angle) * radius + 'px');
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
