@@ -248,6 +248,12 @@
       border-radius:28px;
       box-shadow:0 22px 50px rgba(0,0,0,.22);
       transition:transform .6s ease;
+      /* flex: 0 0 80%;
+    /* max-width: 80%;
+    height: 220px;
+    scroll-snap-align: center;
+    border-radius: 24px;
+    transform: none !important; */ 
     }
 
     .hero-photos img:nth-child(1){
@@ -278,8 +284,21 @@
       .hero h1 { font-size: 3.4rem; }
       .hero p { font-size: 1.3rem; }
       .story { grid-template-columns: 1fr; }
+      .hero-photos {
+      /* display: flex;
+      gap: 20px;
+      padding: 0 20px;
+      overflow-x: auto; */
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      transform: none;
     }
- 
+
+  .hero-photos::-webkit-scrollbar {
+    display: none; /* ซ่อน scrollbar */
+      
+    }
+  }
 </style>
 </head>
 <body>
