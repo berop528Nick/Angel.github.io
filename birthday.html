@@ -285,14 +285,14 @@
       .hero p { font-size: 1.3rem; }
       .story { grid-template-columns: 1fr; }
       .hero-photos {
-      display: flex;
-      gap: 20px;
-      padding: 0 20px;
-      overflow-x: auto; 
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      transform: none;
-    }
+        display: flex;
+        gap: 20px;
+        padding: 0 20px;
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        transform: none;
+      }
 
   .hero-photos::-webkit-scrollbar {
     display: none; /* ซ่อน scrollbar */
@@ -445,6 +445,44 @@
   lightbox.onclick = function () {
     lightbox.classList.remove('show');
   };
+//////////////////////////
+          (function () {
+        if (window.innerWidth > 768) return;
+
+        const slider = document.querySelector('.hero-photos');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX;
+          scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX;
+          const walk = (startX - x) * 1.2;
+          slider.scrollLeft = scrollLeft + walk;
+        });
+
+        slider.addEventListener('touchend', () => {
+          isDown = false;
+        });
+})();
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 
