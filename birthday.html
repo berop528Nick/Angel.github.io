@@ -43,7 +43,7 @@
     color: #666;
     font-size: 1rem;
   }
-  
+
     html, body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(180deg, #fff6f8, #fdecef);
@@ -234,18 +234,7 @@
       padding: 60px 20px 100px;
       color: #999;
     }
-
-    @keyframes pageFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 3.4rem; }
-      .hero p { font-size: 1.3rem; }
-      .story { grid-template-columns: 1fr; }
-    }
-    .hero-photos{
+       .hero-photos{
       display:flex;
       gap:32px;
       margin-bottom:60px;
@@ -279,6 +268,18 @@
     .hero-photos img:hover{
       transform:scale(1.05);
     }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3.4rem; }
+      .hero p { font-size: 1.3rem; }
+      .story { grid-template-columns: 1fr; }
+    }
+ 
 </style>
 </head>
 <body>
@@ -290,7 +291,7 @@
     <div class="hero-photos">
       <img src="./image/one.JPG" alt="photo 1">
       <img src="image/IMG_1289.jpg" alt="photo 2">
-      <img src="./image/three.*" alt="photo 3">
+      <img src="./image/three.jpg" alt="photo 3">
     </div>
 
     <h1>Happy Birthday 🎂</h1>
